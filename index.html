@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moon School of Music — Redesign Demo</title>
+<meta name="description" content="Private, semi-private and group music lessons in Fairfax, VA. Piano, guitar, violin, drums and voice for ages 4 to adult. Book a free trial lesson.">
+<meta property="og:title" content="Moon School of Music — Music Lessons in Fairfax">
+<meta property="og:description" content="From first notes to standing ovations. Book a free trial lesson.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F28C1B; --orange-2:#FFB347; --ink:#16130F; --ink-2:#2A2622;
+  --cream:#FFF6EC; --paper:#FFFFFF; --muted:#6B635A; --line:#EADFD2;
+  --green:#1F2A25; --radius:22px; --shadow:0 12px 40px rgba(40,25,10,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Urbanist,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:800;font-size:17px;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 8px 24px rgba(242,140,27,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(242,140,27,.5)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.35);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(255,255,255,.22)}
+.eyebrow{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--orange)}
+h2.section{font-size:clamp(32px,5vw,52px);line-height:1.05;font-weight:900;letter-spacing:-.02em;margin:10px 0 14px}
+.lede{font-size:19px;color:var(--muted);max-width:620px}
+section{padding:96px 0}
+.demo-flag{position:fixed;left:16px;bottom:16px;z-index:90;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;opacity:.85}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+header.scrolled{border-color:var(--line);box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:.02em}
+.logo-mark{width:42px;height:42px;border-radius:12px;background:var(--orange);display:grid;place-items:center;color:#fff;font-size:22px}
+.links{display:flex;gap:28px;font-weight:600;color:var(--ink-2)}
+.links a:hover{color:var(--orange)}
+.nav .btn{padding:12px 22px;font-size:15px}
+@media (max-width:860px){.links{display:none}.nav .btn{display:none}}
+
+/* Hero */
+.hero{position:relative;background:radial-gradient(1200px 600px at 75% 20%,#3b2a17 0%,var(--ink) 60%);color:#fff;overflow:hidden;padding:80px 0 120px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.rating-pill{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:8px 16px;border-radius:999px;font-weight:700;font-size:14px}
+.stars{color:var(--orange-2);letter-spacing:2px}
+.hero h1{font-size:clamp(44px,7vw,84px);line-height:.98;font-weight:900;letter-spacing:-.03em;margin:22px 0 20px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--orange),var(--orange-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{font-size:20px;color:#E9DED2;max-width:540px;margin-bottom:34px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-note{margin-top:18px;font-size:14px;color:#BFB3A6}
+.stage{position:relative;aspect-ratio:4/5;border-radius:28px;background:linear-gradient(160deg,#2b2016,#120e0a);border:1px solid rgba(255,255,255,.08);box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}
+.stage .label{position:absolute;top:18px;left:18px;display:flex;gap:8px;align-items:center;font-size:13px;font-weight:700;background:rgba(0,0,0,.4);padding:6px 12px;border-radius:999px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#ff4d4d;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.eq{position:absolute;left:0;right:0;top:22%;display:flex;justify-content:center;align-items:flex-end;gap:7px;height:38%}
+.eq span{width:10px;border-radius:6px;background:linear-gradient(var(--orange-2),var(--orange));animation:eq 1.2s ease-in-out infinite}
+@keyframes eq{0%,100%{height:15%}50%{height:100%}}
+.keys{position:absolute;bottom:0;left:0;right:0;height:30%;display:flex;padding:0 6px 6px}
+.keys i{flex:1;margin:0 2px;background:linear-gradient(#fff,#eee);border-radius:0 0 8px 8px;position:relative;transition:background .1s}
+.keys i.on{background:linear-gradient(#FFD9A8,var(--orange-2))}
+.note{position:absolute;font-size:26px;color:var(--orange-2);opacity:0;animation:float 5s linear infinite}
+@keyframes float{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-320px) rotate(25deg);opacity:0}}
+.play{position:absolute;inset:0;display:grid;place-items:center}
+.play button{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--ink);font-size:28px;box-shadow:0 10px 40px rgba(0,0,0,.4);transition:transform .2s}
+.play button:hover{transform:scale(1.08)}
+
+/* Trust bar */
+.trust{background:var(--orange);color:#fff;padding:18px 0}
+.trust .wrap{display:flex;justify-content:space-around;gap:16px;flex-wrap:wrap;font-weight:800;font-size:15px}
+.trust span::before{content:"✓ ";opacity:.8}
+
+/* Journey */
+.journey{background:var(--cream)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;position:relative}
+.timeline::before{content:"";position:absolute;top:34px;left:6%;right:6%;height:3px;background:linear-gradient(90deg,var(--line),var(--orange));z-index:0}
+@media (max-width:860px){.timeline{grid-template-columns:1fr 1fr}.timeline::before{display:none}}
+@media (max-width:520px){.timeline{grid-template-columns:1fr}}
+.step{position:relative;z-index:1;background:#fff;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.step.in{opacity:1;transform:none}
+.step .dot{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:900;margin-bottom:16px}
+.step:last-child .dot{background:var(--orange)}
+.step .when{font-size:13px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.1em}
+.step h3{font-size:22px;margin:4px 0 8px}
+.step p{color:var(--muted)}
+
+/* Instruments */
+.inst-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:40px}
+@media (max-width:900px){.inst-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.inst-grid{grid-template-columns:repeat(2,1fr)}}
+.inst{background:var(--cream);border:2px solid transparent;border-radius:var(--radius);padding:26px 16px;text-align:center;transition:all .2s}
+.inst:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.inst.active{border-color:var(--orange);background:#fff;box-shadow:var(--shadow)}
+.inst .ic{font-size:42px}
+.inst b{display:block;margin-top:10px;font-size:18px}
+.inst small{color:var(--muted);font-weight:600}
+.inst-panel{margin-top:22px;background:var(--ink);color:#fff;border-radius:var(--radius);padding:32px;display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center}
+@media (max-width:760px){.inst-panel{grid-template-columns:1fr}}
+.inst-panel h3{font-size:30px;margin-bottom:8px}
+.inst-panel p{color:#D9CFC4}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:rgba(255,255,255,.1);padding:6px 12px;border-radius:999px;font-size:14px;font-weight:700}
+
+/* Quiz */
+.quiz-sec{background:var(--green);color:#fff}
+.quiz-sec .lede{color:#C8D1CB}
+.quiz{margin-top:40px;background:#fff;color:var(--ink);border-radius:28px;padding:40px;max-width:760px;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+@media (max-width:520px){.quiz{padding:24px}}
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:28px}
+.progress div{height:100%;background:var(--orange);width:0;transition:width .4s}
+.quiz h3{font-size:26px;margin-bottom:20px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.opts{grid-template-columns:1fr}}
+.opt{text-align:left;padding:18px 20px;border:2px solid var(--line);border-radius:16px;font-weight:700;font-size:17px;transition:all .15s}
+.opt:hover{border-color:var(--orange);background:var(--cream)}
+.opt span{display:block;font-weight:500;font-size:14px;color:var(--muted)}
+.result{text-align:center}
+.result .big{font-size:64px}
+.result h3{font-size:32px;margin:6px 0 8px}
+.result p{color:var(--muted);max-width:480px;margin:0 auto 24px}
+.link-btn{color:var(--muted);font-weight:700;text-decoration:underline;margin-top:14px;display:inline-block}
+
+/* Teachers */
+.teach-row{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:30px 4px 20px;margin-top:10px}
+.teach-row::-webkit-scrollbar{height:8px}.teach-row::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+.teacher{flex:0 0 260px;scroll-snap-align:start;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;text-align:left;transition:transform .2s}
+.teacher:hover{transform:translateY(-6px)}
+.portrait{height:250px;display:grid;place-items:center;font-size:64px;color:#fff;position:relative}
+.portrait .clip{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,.55);font-size:13px;font-weight:700;padding:5px 10px;border-radius:999px}
+.teacher .info{padding:18px 20px 22px}
+.teacher b{font-size:19px;display:block}
+.teacher .role{color:var(--orange);font-weight:800;font-size:14px}
+.teacher .cred{color:var(--muted);font-size:14px;margin-top:6px}
+
+/* Reviews */
+.reviews{background:var(--cream)}
+.rev-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.g-badge{display:flex;align-items:center;gap:14px;background:#fff;padding:16px 22px;border-radius:18px;box-shadow:var(--shadow)}
+.g-badge .score{font-size:38px;font-weight:900}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+@media (max-width:900px){.rev-grid{grid-template-columns:1fr}}
+.rev{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.rev q{font-size:19px;font-weight:600;line-height:1.45;flex:1;quotes:"“" "”"}
+.rev .who{display:flex;align-items:center;gap:12px;margin-top:20px}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-weight:900}
+.rev .who small{display:block;color:var(--muted)}
+
+/* Pricing */
+.toggle{display:inline-flex;background:var(--cream);border-radius:999px;padding:6px;margin-top:26px}
+.toggle button{padding:12px 22px;border-radius:999px;font-weight:800;color:var(--muted)}
+.toggle button.on{background:var(--ink);color:#fff}
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+@media (max-width:900px){.price-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.price-grid{grid-template-columns:1fr}}
+.plan{border:2px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;background:#fff}
+.plan.pop{border-color:var(--orange);box-shadow:0 20px 50px rgba(242,140,27,.2)}
+.tag{position:absolute;top:-13px;left:24px;background:var(--orange);color:#fff;font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+.tag.dark{background:var(--ink)}
+.plan .len{font-weight:800;font-size:18px}
+.plan .per{font-size:44px;font-weight:900;letter-spacing:-.02em;margin-top:10px}
+.plan .per small{font-size:16px;color:var(--muted);font-weight:600}
+.plan .mo{color:var(--muted);font-weight:600}
+.plan .fit{margin-top:14px;font-size:15px;color:var(--ink-2)}
+.included{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px 28px;color:var(--ink-2);font-weight:600}
+.included span::before{content:"✓";color:var(--orange);font-weight:900;margin-right:8px}
+.fine{margin-top:14px;font-size:13px;color:var(--muted)}
+
+/* Events */
+.events{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+@media (max-width:900px){.events{grid-template-columns:1fr}}
+.event{display:flex;gap:18px;align-items:center;border:2px solid var(--line);border-radius:var(--radius);padding:20px}
+.date{flex:0 0 68px;height:72px;border-radius:16px;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;line-height:1}
+.date small{font-size:12px;color:var(--orange-2);margin-bottom:4px}
+.date b{font-size:28px}
+.event p{color:var(--muted);font-size:15px}
+
+/* Booking */
+.book{background:radial-gradient(900px 500px at 20% 0%,#3b2a17,var(--ink) 65%);color:#fff}
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media (max-width:900px){.book-grid{grid-template-columns:1fr}}
+.book .lede{color:#D9CFC4}
+.perks{margin-top:28px;display:grid;gap:14px}
+.perks div{display:flex;gap:14px;align-items:flex-start;font-weight:600;font-size:17px}
+.perks i{font-style:normal;flex:0 0 34px;height:34px;border-radius:10px;background:rgba(242,140,27,.2);display:grid;place-items:center}
+form{background:#fff;color:var(--ink);border-radius:28px;padding:34px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.match-note{display:none;background:var(--cream);border-radius:14px;padding:12px 16px;font-weight:700;margin-bottom:18px;font-size:15px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+label{display:block;font-weight:700;font-size:14px;margin-bottom:14px}
+input,select{display:block;width:100%;margin-top:6px;padding:14px 16px;border:2px solid var(--line);border-radius:14px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:none;border-color:var(--orange)}
+form .btn{width:100%;justify-content:center;margin-top:6px}
+.form-fine{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
+.success{text-align:center;padding:30px 10px}
+.success .big{font-size:60px}
+
+footer{background:#0E0C0A;color:#A99E92;padding:50px 0 110px;font-size:15px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+@media (max-width:760px){.foot{grid-template-columns:1fr}}
+footer b{color:#fff;display:block;margin-bottom:10px}
+
+/* Mobile bar */
+.mbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:10px;background:rgba(22,19,15,.92);backdrop-filter:blur(10px);padding:10px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.3);transform:translateY(120%);transition:transform .3s}
+.mbar.show{transform:none}
+.mbar a{flex:1;text-align:center;padding:14px;border-radius:14px;font-weight:800;color:#fff}
+.mbar .call{background:rgba(255,255,255,.12)}
+.mbar .go{background:var(--orange)}
+@media (max-width:860px){.mbar{display:flex}.demo-flag{display:none}}
+
+/* Modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.75);display:none;place-items:center;padding:20px}
+.modal.open{display:grid}
+.modal-box{width:min(860px,100%);aspect-ratio:16/9;background:#000;border-radius:20px;display:grid;place-items:center;color:#fff;text-align:center;position:relative;padding:20px}
+.modal-box p{color:#aaa;margin-top:8px}
+.close{position:absolute;top:12px;right:14px;font-size:28px;color:#fff}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="logo-mark">☾</span>MOON <span style="font-weight:600;color:var(--muted);font-size:14px;letter-spacing:.1em">SCHOOL OF MUSIC</span></a>
+    <nav class="links">
+      <a href="#instruments">Instruments</a>
+      <a href="#teachers">Teachers</a>
+      <a href="#pricing">Tuition</a>
+      <a href="#events">Recitals</a>
+    </nav>
+    <a href="#book" class="btn btn-primary">Book a Free Trial</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="rating-pill"><span class="stars">★★★★★</span> 5.0 on Google · Fairfax families since 2016</span>
+      <h1>From first notes to <em>standing ovations.</em></h1>
+      <p class="sub">Piano, guitar, violin, drums and voice lessons in Fairfax, taught by conservatory-trained teachers. Ages 4 to adult, weekday after school.</p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-primary">Book a Free Trial Lesson →</a>
+        <button class="btn btn-ghost" data-video>▶ Watch a student recital</button>
+      </div>
+      <p class="hero-note">Matched with a teacher within 24 hours. No commitment.</p>
+    </div>
+    <div class="stage" aria-label="Animated performance preview">
+      <div class="label"><span class="live-dot"></span> Spring Recital highlights</div>
+      <div class="eq" id="eq"></div>
+      <div class="keys" id="keys"></div>
+      <div class="play"><button data-video aria-label="Play recital video">▶</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust"><div class="wrap">
+  <span>Serving Fairfax since 2016</span><span>Background-checked faculty</span><span>5-star rated by local families</span><span>Two recitals every year</span>
+</div></div>
+
+<!-- JOURNEY -->
+<section class="journey">
+  <div class="wrap">
+    <div class="eyebrow">The Moon journey</div>
+    <h2 class="section">Here's what the first year looks like.</h2>
+    <p class="lede">Every student follows a clear path with milestones parents can see, not just "practice more."</p>
+    <div class="timeline">
+      <div class="step"><div class="dot">1</div><div class="when">Week 1</div><h3>Free trial and match</h3><p>We pair your child with the right teacher and format for their age, goals and personality.</p></div>
+      <div class="step"><div class="dot">2</div><div class="when">Month 3</div><h3>Reading and real songs</h3><p>Note reading, rhythm and the first full pieces they're proud to play at home.</p></div>
+      <div class="step"><div class="dot">3</div><div class="when">Month 6</div><h3>First recital</h3><p>A real stage, a real audience and a moment you'll film on your phone.</p></div>
+      <div class="step"><div class="dot">★</div><div class="when">Year 1+</div><h3>Standing ovations</h3><p>Competitions, auditions and festivals for students who want to go further.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUMENTS -->
+<section id="instruments">
+  <div class="wrap">
+    <div class="eyebrow">Instruments</div>
+    <h2 class="section">Pick an instrument to explore.</h2>
+    <div class="inst-grid" id="instGrid"></div>
+    <div class="inst-panel" id="instPanel"></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-sec" id="quiz">
+  <div class="wrap">
+    <div class="eyebrow">Not sure where to start?</div>
+    <h2 class="section">Find the right fit in 30 seconds.</h2>
+    <p class="lede">Answer three quick questions and we'll recommend an instrument and lesson format.</p>
+    <div class="quiz" id="quizBox"></div>
+  </div>
+</section>
+
+<!-- TEACHERS -->
+<section id="teachers">
+  <div class="wrap">
+    <div class="eyebrow">Meet the faculty</div>
+    <h2 class="section">Your child chooses a teacher, not just a school.</h2>
+    <p class="lede">Advanced training, professional experience and real care for students. Tap a card to see a short intro.</p>
+    <div class="teach-row" id="teachRow"></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="rev-head">
+      <div><div class="eyebrow">What parents say</div><h2 class="section">Loved by Fairfax families.</h2></div>
+      <div class="g-badge"><div class="score">5.0</div><div><div class="stars">★★★★★</div><small style="color:var(--muted);font-weight:700">Google reviews</small></div></div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev"><q>Great place for my 2 kids to grow professionally in music, one in violin and one in piano.</q><div class="who"><span class="avatar">L</span><div><b>Leila K.</b><small>Parent · violin &amp; piano</small></div></div></div>
+      <div class="rev"><q>Top-notch instructors, outstanding recitals, and good leadership. I wholeheartedly recommend Moon School of Music.</q><div class="who"><span class="avatar">E</span><div><b>Eve F.</b><small>Parent</small></div></div></div>
+      <div class="rev"><q>The facility is great, teachers are excellent, and staff is responsive! Highly recommend!</q><div class="who"><span class="avatar">F</span><div><b>Francis F.</b><small>Parent</small></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="eyebrow">Tuition</div>
+    <h2 class="section">Simple, transparent tuition.</h2>
+    <p class="lede">Billed monthly. Your first lesson is free.</p>
+    <div class="toggle" id="toggle">
+      <button class="on" data-plan="private">1-on-1 Private</button>
+      <button data-plan="semi">Semi-Private</button>
+      <button data-plan="group">Group</button>
+    </div>
+    <div class="price-grid" id="priceGrid"></div>
+    <div class="included"><span>Two recitals a year</span><span>Progress check-ins</span><span>Flexible weekday times</span><span>Make-up lesson policy</span></div>
+    <p class="fine">Per-lesson figures assume 4 lessons per month. Demo copy; confirm details with the school.</p>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Come see us</div>
+    <h2 class="section">Upcoming at Moon.</h2>
+    <div class="events">
+      <div class="event"><div class="date"><small>DEC</small><b>13</b></div><div><b>Winter Recital</b><p>Open to families and friends. Free admission.</p></div></div>
+      <div class="event"><div class="date"><small>JAN</small><b>10</b></div><div><b>Open House</b><p>Tour the studios and try every instrument.</p></div></div>
+      <div class="event"><div class="date"><small>FEB</small><b>07</b></div><div><b>Group Class Launch</b><p>New beginner piano and violin groups.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book" id="book">
+  <div class="wrap book-grid">
+    <div>
+      <div class="eyebrow">Free trial lesson</div>
+      <h2 class="section">Let's find your child's teacher.</h2>
+      <p class="lede">Tell us a little about your student. We'll reply within 24 hours with a matched teacher and open times.</p>
+      <div class="perks">
+        <div><i>🎯</i>Matched to age, goals and personality</div>
+        <div><i>🎁</i>First lesson free, no commitment</div>
+        <div><i>📍</i>10875 Main Street, Fairfax, with easy parking</div>
+        <div><i>📞</i>Prefer to talk? <a href="tel:7038289494" style="color:var(--orange-2)">703-828-9494</a></div>
+      </div>
+    </div>
+    <form id="form" novalidate>
+      <div class="match-note" id="matchNote"></div>
+      <div class="row">
+        <label>Parent name<input required name="name" autocomplete="name"></label>
+        <label>Student age<input required name="age" type="number" min="3" max="99" inputmode="numeric"></label>
+      </div>
+      <div class="row">
+        <label>Email<input required name="email" type="email" autocomplete="email"></label>
+        <label>Phone<input required name="phone" type="tel" autocomplete="tel"></label>
+      </div>
+      <div class="row">
+        <label>Instrument<select name="instrument" id="fInst"><option>Piano</option><option>Guitar</option><option>Violin / Viola</option><option>Drums</option><option>Voice</option><option>Not sure yet</option></select></label>
+        <label>Format<select name="format" id="fFormat"><option>1-on-1 Private</option><option>Semi-Private</option><option>Group</option></select></label>
+      </div>
+      <label>Preferred days/times (optional)<input name="times" placeholder="e.g. Tue/Thu after 4pm"></label>
+      <button class="btn btn-primary" type="submit">Book My Free Trial →</button>
+      <p class="form-fine">Demo form: nothing is sent.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div><b>Moon School of Music</b>10875 Main Street Ste 102 &amp; 107<br>Fairfax, VA 22030<br>703-828-9494</div>
+    <div><b>Hours</b>Mon–Thu 3–9pm<br>Fri 3–7pm<br>Sat–Sun closed</div>
+    <div><b>Explore</b>About · Careers · FAQ<br>Calendar · Privacy</div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar"><a class="call" href="tel:7038289494">📞 Call</a><a class="go" href="#book">Book Free Trial</a></div>
+<div class="demo-flag">Redesign demo</div>
+
+<div class="modal" id="modal"><div class="modal-box"><button class="close" aria-label="Close">×</button><div><div style="font-size:48px">🎹</div><b style="font-size:22px">Student recital video</b><p>A 60–90s highlight reel of student performances would play here, self-hosted with no YouTube branding.</p></div></div></div>
+
+<script>
+// Sticky header shadow + mobile bar
+const hdr=document.getElementById('hdr'), mbar=document.getElementById('mbar');
+addEventListener('scroll',()=>{const y=scrollY;hdr.classList.toggle('scrolled',y>10);mbar.classList.toggle('show',y>500)},{passive:true});
+
+// Hero: equalizer, keys, floating notes
+const eq=document.getElementById('eq');
+for(let i=0;i<22;i++){const s=document.createElement('span');s.style.animationDelay=(Math.random()*-1.2)+'s';s.style.animationDuration=(0.8+Math.random()*0.8)+'s';eq.appendChild(s)}
+const keys=document.getElementById('keys');
+for(let i=0;i<14;i++)keys.appendChild(document.createElement('i'));
+const ks=[...keys.children];
+setInterval(()=>{const k=ks[Math.floor(Math.random()*ks.length)];k.classList.add('on');setTimeout(()=>k.classList.remove('on'),260)},180);
+const stage=document.querySelector('.stage');
+['♪','♫','♩','♬'].forEach((n,i)=>{for(let j=0;j<2;j++){const e=document.createElement('div');e.className='note';e.textContent=n;e.style.left=(10+Math.random()*80)+'%';e.style.bottom='30%';e.style.animationDelay=(i*1.2+j*2.5)+'s';stage.appendChild(e)}});
+
+// Video modal
+const modal=document.getElementById('modal');
+document.querySelectorAll('[data-video]').forEach(b=>b.onclick=()=>modal.classList.add('open'));
+modal.onclick=e=>{if(e.target===modal||e.target.classList.contains('close'))modal.classList.remove('open')};
+addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
+
+// Journey reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+document.querySelectorAll('.step').forEach((s,i)=>{s.style.transitionDelay=(i*120)+'ms';io.observe(s)});
+
+// Instruments
+const INST=[
+ {id:'Piano',ic:'🎹',ages:'Ages 4+',desc:'The best foundation for any musician. Students learn to read music, build coordination and play real repertoire from the first month.',chips:['Classical','Pop & film','Theory','Competition prep']},
+ {id:'Guitar',ic:'🎸',ages:'Ages 7+',desc:'Acoustic or electric. Chords, riffs and songs they already love, plus the reading and technique to keep growing.',chips:['Acoustic','Electric','Songwriting','Band skills']},
+ {id:'Violin / Viola',ic:'🎻',ages:'Ages 4+',desc:'Careful posture and ear training from day one, building toward orchestra auditions and chamber groups.',chips:['Suzuki-friendly','Orchestra prep','Chamber','Auditions']},
+ {id:'Drums',ic:'🥁',ages:'Ages 6+',desc:'Rhythm, independence and groove. A great outlet for energetic kids, and a skill every band needs.',chips:['Rock & pop','Jazz basics','Reading','Practice pad plans']},
+ {id:'Voice',ic:'🎤',ages:'Ages 7+',desc:'Healthy technique, confidence and performance skills for musical theater, choir, pop or classical singing.',chips:['Musical theater','Choir','Pop','Audition prep']},
+];
+const grid=document.getElementById('instGrid'), panel=document.getElementById('instPanel');
+function showInst(i){const d=INST[i];[...grid.children].forEach((c,j)=>c.classList.toggle('active',i===j));
+ panel.innerHTML=`<div><h3>${d.ic} ${d.id} lessons</h3><p>${d.desc}</p><div class="chips">${d.chips.map(c=>`<span class="chip">${c}</span>`).join('')}<span class="chip">${d.ages}</span></div></div><div style="text-align:right"><a href="#book" class="btn btn-primary" data-inst="${d.id}">Try a free ${d.id.split(' ')[0].toLowerCase()} lesson →</a></div>`;
+ panel.querySelector('[data-inst]').onclick=()=>prefill(d.id)}
+INST.forEach((d,i)=>{const b=document.createElement('button');b.className='inst';b.innerHTML=`<div class="ic">${d.ic}</div><b>${d.id}</b><small>${d.ages}</small>`;b.onclick=()=>showInst(i);grid.appendChild(b)});
+showInst(0);
+
+// Quiz
+const Q=[
+ {q:'How old is the student?',o:[['4–6','Little beginners'],['7–10','Elementary'],['11–14','Middle school'],['15+','Teens and adults']]},
+ {q:'What sound gets them excited?',o:[['Classical and film music','Piano, strings'],['Rock, pop and bands','Guitar, drums'],['Singing along to everything','Voice'],['Honestly, not sure','We\'ll help']]},
+ {q:'What\'s the goal?',o:[['Just for fun','Low pressure, lots of joy'],['Steady progress','Skills that build year over year'],['Competitions and auditions','Serious, structured training'],['Learn with a sibling or friend','Shared lessons']]},
+];
+let qi=0, ans=[];
+const box=document.getElementById('quizBox');
+function renderQ(){
+ if(qi>=Q.length)return renderResult();
+ const d=Q[qi];
+ box.innerHTML=`<div class="progress"><div style="width:${(qi/Q.length)*100}%"></div></div><div class="eyebrow">Question ${qi+1} of ${Q.length}</div><h3>${d.q}</h3><div class="opts">${d.o.map((o,i)=>`<button class="opt" data-i="${i}">${o[0]}<span>${o[1]}</span></button>`).join('')}</div>`;
+ box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ans.push(+b.dataset.i);qi++;renderQ()});
+}
+function renderResult(){
+ const [age,sound,goal]=ans;
+ let inst = sound===0?(age===0?'Piano':'Violin / Viola'):sound===1?(age<=1?'Drums':'Guitar'):sound===2?'Voice':'Piano';
+ if(sound===1&&age===0)inst='Piano';
+ const fmt = goal===3?'Semi-Private':(goal===0&&age<=1?'Group':'1-on-1 Private');
+ const icon=INST.find(x=>x.id===inst).ic;
+ const why = {
+  'Piano':'Piano builds reading, rhythm and coordination, so it makes every later instrument easier.',
+  'Violin / Viola':'Strings reward early starts and open the door to orchestras and chamber groups.',
+  'Guitar':'Guitar gets them playing the songs they love quickly, which keeps motivation high.',
+  'Drums':'Drums turn energy into rhythm, and every band needs a great drummer.',
+  'Voice':'They already sing. Voice lessons turn that into confident, healthy technique.'}[inst];
+ box.innerHTML=`<div class="progress"><div style="width:100%"></div></div><div class="result"><div class="big">${icon}</div><div class="eyebrow">Our recommendation</div><h3>${inst} · ${fmt}</h3><p>${why}</p><a href="#book" class="btn btn-primary" id="qBook">Book this as a free trial →</a><br><button class="link-btn" id="qRe">Start over</button></div>`;
+ document.getElementById('qBook').onclick=()=>prefill(inst,fmt,true);
+ document.getElementById('qRe').onclick=()=>{qi=0;ans=[];renderQ()};
+}
+renderQ();
+
+// Teachers (placeholders)
+const T=[['Piano','🎹','#E07A1F'],['Violin','🎻','#2F3E36'],['Guitar','🎸','#7A4B2A'],['Voice','🎤','#B5542C'],['Drums','🥁','#3A3530'],['Piano','🎹','#9C6B3A']];
+const tr=document.getElementById('teachRow');
+T.forEach(([r,ic,c],i)=>{const b=document.createElement('button');b.className='teacher';b.innerHTML=`<div class="portrait" style="background:linear-gradient(160deg,${c},#120e0a)">${ic}<span class="clip">▶ 15s intro</span></div><div class="info"><span class="role">${r}</span><b>Teacher Name</b><div class="cred">Conservatory degree · years teaching · specialty</div></div>`;b.onclick=()=>modal.classList.add('open');tr.appendChild(b)});
+
+// Pricing
+const P={private:[[30,260,'Ages 4–7 and first-year beginners','Best for beginners'],[45,370,'Most students after year one','Most popular'],[60,480,'Intermediate and advanced'],[75,590,'Competition and audition prep']],
+ semi:[[45,240,'Siblings or friends at a similar level','Most popular'],[60,300,'Duos ready for longer pieces']],
+ group:[[60,220,'Social learners and new beginners','Lowest cost']]};
+const pg=document.getElementById('priceGrid');
+function renderP(k){pg.style.gridTemplateColumns='';pg.innerHTML=P[k].map(([m,p,fit,tag])=>{const pop=tag==='Most popular';return `<div class="plan ${pop?'pop':''}">${tag?`<span class="tag ${pop?'':'dark'}">${tag}</span>`:''}<div class="len">${m}-minute lessons</div><div class="per">$${Math.round(p/4)}<small> / lesson</small></div><div class="mo">$${p} per month</div><div class="fit">${fit}</div></div>`}).join('');
+ document.querySelectorAll('#toggle button').forEach(b=>b.classList.toggle('on',b.dataset.plan===k))}
+document.querySelectorAll('#toggle button').forEach(b=>b.onclick=()=>renderP(b.dataset.plan));
+renderP('private');
+
+// Form
+function prefill(inst,fmt,fromQuiz){document.getElementById('fInst').value=inst;if(fmt)document.getElementById('fFormat').value=fmt;
+ const n=document.getElementById('matchNote');n.style.display='block';n.textContent=fromQuiz?`✨ Your match: ${inst} · ${fmt}. We've filled this in for you.`:`🎵 ${inst} selected. Just add your details.`}
+const form=document.getElementById('form');
+form.onsubmit=e=>{e.preventDefault();
+ const bad=[...form.querySelectorAll('[required]')].filter(i=>!i.checkValidity());
+ form.querySelectorAll('input').forEach(i=>i.style.borderColor='');
+ if(bad.length){bad.forEach(i=>i.style.borderColor='#D9480F');bad[0].focus();return}
+ const name=form.querySelector('[name=name]').value.trim().split(' ')[0];
+ form.innerHTML=`<div class="success"><div class="big">🎉</div><h3 style="font-size:28px;margin:8px 0">You're on the list, ${name.replace(/[<>&]/g,'')}!</h3><p style="color:var(--muted)">We'll reach out within 24 hours with a matched teacher and open trial times. (Demo: nothing was sent.)</p></div>`};
+</script>
+</body>
+</html>
