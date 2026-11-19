@@ -2,7 +2,7 @@
 
 A clickable concept for a modern, conversion-focused homepage for Moon School of Music (Fairfax, VA).
 
-**Live demo:** _GitHub Pages link goes here once enabled_
+**Live demo:** https://danielkim13.github.io/moon-school-redesign-demo/
 
 ## What's new compared with the current site
 
